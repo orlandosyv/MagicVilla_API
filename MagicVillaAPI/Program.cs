@@ -1,8 +1,13 @@
+using MagicVillaAPI.Data;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddDbContext<ApplicationDbContext>(options => {
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultSQLConnection")); 
+});
 
 builder.Services.AddControllers(option => {
     //option.ReturnHttpNotAcceptable = true;
